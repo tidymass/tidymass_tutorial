@@ -1,0 +1,94 @@
+# Convert raw MS data
+
+We can use `massconverter` package to convert raw data to other formats.
+
+The website of `massconverter`. <https://massconverter.tidymass.org/>
+
+## Download demo data
+
+Download the demo data from BaiduYun and put it in `raw_data` folder.
+
+Link: <https://pan.baidu.com/s/1_KnD_yFLqzkoAViUoB_FnA?pwd=1234>
+
+Code: 1234
+
+![](figures/Screen-Shot%2019.png)
+
+## Open docker
+
+Open docker like below.
+
+![](figures/Screen-Shot%2017.png)
+
+## Create a new R script
+
+Open the project you created.
+
+![](figures/Screen-Shot%2018.png)
+
+Create a new R script named `raw_data_processing.R`.
+
+Then add below code.
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+library(tidymass)
+
+masstools::setwd_project()
+
+rm(list = ls())
+
+setwd("raw_data/")
+
+```
+
+## Pull pwiz docker
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+docker_pull_pwiz()
+```
+
+It is successfully installed when get this message.
+
+![](figures/Screen-Shot%2020.png)
+
+## Set the msconvert parameters
+
+Then we need to set parameters for converter.
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+parameter <-
+  massconverter::create_msconvert_parameter(
+    output_format = "mzXML",
+    binary_encoding_precision = "32",
+    zlib = TRUE,
+    write_index = TRUE,
+    peak_picking_algorithm = "cwt",
+    vendor_mslevels = c(1, NA),
+    cwt_mslevels = c(1, NA),
+    cwt_min_snr = 0.1,
+    cwt_min_peak_spacing = 0.1,
+    subset_polarity = "positive",
+    subset_scan_number = c(NA, NA),
+    subset_scan_time = c(60, 300),
+    subset_mslevels = c(1, 2),
+    zero_samples_mode = "removeExtra",
+    zero_samples_mslevels = c(1, NA),
+    zero_samples_add_missing_flanking_zero_count = 5
+  )
+```
+
+-   output_format: "mzXML","mzML", "mz5", "mgf", "text", "ms1", "cms1", "ms2", or "cms2".
+
+## Convert data
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+convert_raw_data(input_path = ".", 
+                 output_path = "mzxml/", 
+                 msconvert_parameter = parameter, 
+                 docker_parameters = c(),
+                 process_all = FALSE)
+```
+
+Then all the mzXML data will be generated in the `mzXML` folder.
+
+![](figures/Screen-Shot%2021.png)

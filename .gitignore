@@ -2,3 +2,14 @@
 .Rhistory
 .RData
 .Ruserdata
+
+/.quarto/
+
+code
+code/
+
+raw_data
+raw_data/
+
+_book
+_book/

@@ -1,0 +1,87 @@
+# Install TidyMass
+
+## Update R first.
+
+`TidyMass` require R version > 4.1. You can check your R version in your console:
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+version
+```
+
+If your R version is less than 4.1, please download the latest version of R and install R again.
+
+See [here](https://tidymass-book.tidymass.org/install_rstudio_r).
+
+## Install `tidyverse`
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+if(!require(tidyverse)){
+  install.packages("tidyverse")
+}
+```
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+library(tidyverse)
+```
+
+## Install tidyMass
+
+TidyMass is in GitHub. [https://github.com/tidymass/](https://github.com/tidymass/)
+
+You can install it from GitHub or GitLab.
+
+More information can be found here:
+
+[https://www.tidymass.org/start/installation/](https://www.tidymass.org/start/installation/)
+
+
+Install `remotes` package first.
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+if(!require(remotes)){
+  install.packages("remotes")
+}
+```
+
+Then install `tidymass`.
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+remotes::install_gitlab("jaspershen/tidymass", dependencies = TRUE)
+```
+
+When it is done, load tidymass:
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+library(tidymass)
+```
+
+![](figures/Screen-Shot 13.png)
+
+If it shows messages like this, it means you have successfully installed tidymass. If not, please contact me via [email](shenxt1990@163.com) or [wechat](https://www.shenxt.info/files/wechat_QR.jpg)
+
+## Install other packages
+
+[`massconverter`](https://massconverter.tidymass.org/) and [`massdatabase`](https://massdatabase.tidymass.org/) are not core members of tidymass, you can install them by below code.
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+remotes::install_gitlab("jaspershen/massconverter", dependencies = TRUE)
+```
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+remotes::install_gitlab("jaspershen/massdatabase", dependencies = TRUE)
+```
+
+When it is done, load them:
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+library(massconverter)
+```
+
+![](figures/Screen-Shot 14.png)
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+library(massdatabase)
+```
+
+![](figures/Screen-Shot 15.png)
+

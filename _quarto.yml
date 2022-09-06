@@ -2,12 +2,18 @@ project:
   type: book
 
 book:
-  title: "tidymass_tutorial"
-  author: "Jane Doe"
+  title: "TidyMass tutorial"
+  author: "Xiaotao Shen"
   date: "9/4/2022"
   chapters:
     - index.qmd
+    - install_Rstudio_R.qmd
     - intro.qmd
+    - install_tidymass.qmd
+    - install_docker.qmd
+    - Rstudio_project.qmd
+    - massconverter.qmd
+    - massprocesser.qmd
     - summary.qmd
     - references.qmd
 

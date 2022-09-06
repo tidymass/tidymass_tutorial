@@ -1,0 +1,13 @@
+# Install docker
+
+`massconverter` needs docker, so please install docker.
+
+Download the docker here, [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/) according to your OS.
+
+![](figures/Screen-Shot 16.png)
+
+Then install it step by step.
+
+Then open the docker like below.
+
+![](figures/Screen-Shot 17.png)

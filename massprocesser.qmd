@@ -1,0 +1,149 @@
+# Raw MS data processing
+
+We can use `massprocesser` package to convert raw data to other formats.
+
+The website of `massprocesser`. [https://massprocesser.tidymass.org/](https://massprocesser.tidymass.org/)
+
+## Download demo data
+
+Download the demo data from BaiduYun and put it in `raw_data` folder, and then uncompress it.
+
+Link: [https://pan.baidu.com/s/1kkPFSW2xrNNBUJb-77gsjw?pwd=1234](https://pan.baidu.com/s/1kkPFSW2xrNNBUJb-77gsjw?pwd=1234)
+
+Code: 1234 
+
+![](figures/Screen-Shot 22.png)
+
+## Create a new R script named `convert_data.R`.
+
+Then add below code.
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+library(tidymass)
+```
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+masstools::setwd_project()
+rm(list = ls())
+```
+
+## Run `process_data()` function
+
+Next, we use the `process_data()` function for peak detection and alignment.
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+massprocesser::process_data(
+  path = "raw_data/cell_liang_2020/MS1/",
+  polarity = "positive",
+  ppm = 15,
+  peakwidth = c(5, 30),
+  snthresh = 5,
+  noise = 500,
+  threads = 6,
+  output_tic = TRUE,
+  output_bpc = TRUE,
+  output_rt_correction_plot = TRUE,
+  min_fraction = 0.5,
+  fill_peaks = FALSE
+)
+```
+
+Some important arguments:
+
+* ppm: Peak detection ppm. See the xcms package.
+
+* peakwidth: Peak width. It is dependent on your column and LC system. See the xcms package.
+
+* snthresh: Signal to noise threshold. See the xcms package.
+
+* noise: Noise cutoff. See the xcms package.
+
+* threads: The core number for performing.
+
+* output_tic, output_bpc, and group_for_figure: Do you want to output the TIC or BPC of samples? Some times there are a lot of samples, so you can set the group_for_figure as the group name, for example, you can set it as QC.
+
+* min_fraction: If one peak appears more than min.fraction sample in at least one group samples it will be kept.
+
+* fill_peaks: Do you want to fill the missing values (NA)?
+
+## Output results
+
+After all done, all the results are placed in a new folder named as Result.
+
+![](figures/Screen-Shot 23.png)
+
+### `object`
+
+`object` is a `mass_dataset` class object which can be used for subsequent analysis. 
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+load("raw_data/cell_liang_2020/MS1/Result/object")
+object
+```
+
+### `Peak_table_for_cleaning.csv`
+
+![](figures/Screen-Shot 24.png)
+
+
+## Extract EICs of some features
+
+### Get the targeted table
+
+`massprocesser` can be used to extract of EICs of some features, so you can evaluate the peak shape quality of targeted features.
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+targeted_table <-
+  readr::read_csv("raw_data/cell_liang_2020/MS1/Result/Peak_table_for_cleaning.csv")
+
+mean_int <- targeted_table %>% 
+  dplyr::select(-c(variable_id:rt)) %>% 
+  apply(1, function(x){
+    mean(x, na.rm = TRUE)
+  })
+
+targeted_table<-
+targeted_table %>% 
+  dplyr::select(variable_id:rt) %>% 
+  dplyr::mutate(mean_int = mean_int) %>% 
+  dplyr::arrange(dplyr::desc(mean_int)) %>% 
+  head(10) %>% 
+  dplyr::select(-mean_int)
+
+targeted_table
+```
+
+### Load intermediate data
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+load("raw_data/cell_liang_2020/MS1/Result/intermediate_data/xdata3")
+```
+
+### Data processing
+
+Next, we use the `extract_eic()` to extract feature EICs. And the results are placed in `raw_data/MS1/POS/Result`
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+extract_eic(
+  targeted_table = targeted_table,
+  object = xdata3,
+  polarity = "positive",
+  mz_tolerance = 15,
+  rt_tolerance = 30,
+  threads = 3,
+  add_point = FALSE,
+  path = "raw_data/cell_liang_2020/MS1/Result/",
+  feature_type = "png", 
+  group_for_figure = "Subject"
+)
+```
+
+All the EIC figures will be put in the `raw_data/cell_liang_2020/MS1/Result/` folder.
+
+![](figures/Screen-Shot 25.png)
+
+One example:
+
+![](figures/Screen-Shot 26.png)
+
+

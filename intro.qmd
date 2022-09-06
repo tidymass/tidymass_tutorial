@@ -1,9 +1,9 @@
 # Introduction
 
-This is a book created from markdown and executable code.
+TidyMass project is a comprehensive computational framework that can process the whole workflow of data processing and analysis for LC-MS-based untargeted metabolomics using tidyverse principles.
 
-See @knuth84 for additional discussion of literate programming.
+TidyMass project is an ecosystem of R packages that share an underlying design philosophy, grammar, and data structure, which provides a comprehensive, reproducible, and object-oriented computational framework. TidyMass was designed on the strength of the following strategies: 1) Cross-platform utility. TidyMass is developed using the R language, so it can be installed on most of the commonly used operating systems, namely Windows, Mac OS, and Linux (Ubuntu and CentOS); 2) Uniformity, shareability, traceability, and reproducibility. A uniform data structure has been developed, specifically designed to store and manage processed metabolomics data and processing parameters, making it possible to trace the prior analysis steps and parameters. It could be used in the entire workflow to make it an object-oriented workflow and easy to share; 3) Flexibility and extensibility. The modular architecture makes tidyMass a highly flexible and extensible tool, that users can choose any part of the project in their pipeline. Additionally, users can also improve and integrate it with their own pipeline easily.
 
-```{r}
-1 + 1
-```
+Here, you can learn how to use tidyMass to do the data processing and analysis for the metabolomics data. It contains several parts.
+
+![](figures/Figure_3.png)

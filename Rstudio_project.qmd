@@ -1,0 +1,89 @@
+# Rstudio project
+
+## Rstudio project
+
+RStudio projects make it straightforward to divide your work into multiple contexts, each with their own working directory, workspace, history, and source documents.
+
+It is very simple to use Rstudio project for code and data organization and data analysis.
+
+## Creating Projects
+
+1.  Open the Rstudio.
+
+2.  Create project
+
+To create a new project in the RStudio IDE, use the Create Project command (available on the Projects menu and on the global toolbar):
+
+![](figures/Screen-Shot%202.png)
+
+![](figures/Screen-Shot%208.png)
+
+![](figures/Screen-Shot%204.png)
+
+Text the Directory name and select the directory you want to put.
+
+![](figures/Screen-Shot%205.png)
+
+Then you will get a project named `test`.
+
+![](figures/Screen-Shot%206.png)
+
+## Data organization
+
+All the data, code should be put in the directory same with the Rproj file.
+
+Create folders in the same folder with Rproj file.
+
+1.  `code`: all the code for data processing and analysis.
+
+2.  `raw_data`: raw data.
+
+3.  `data_analysis`
+
+4.  `summary`: Slides.
+
+5.  `manuscript`: all the manuscript related files.
+
+![](figures/Screen-Shot%207.png)
+
+## Directory
+
+> **Only use the relative path, never use absolute path**
+
+When you open the project each time, the path is the directory where `Rproj` is in.
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+getwd()
+```
+
+Please install the `masstools` package first.
+
+<https://masstools.tidymass.org/>
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+if(!require(remotes)){
+install.packages("remotes")
+}
+remotes::install_gitlab("jaspershen/masstools")
+```
+
+For each code, set the path to root directory.
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+library(masstools)
+setwd()
+```
+
+## A typical code for data analysis
+
+1.  Create a code file
+
+![](figures/Screen-Shot%209.png)
+
+2.  Save the code
+
+The code should be in the `code` folder.
+
+![](figures/Screen-Shot%2010.png)
+
+![](figures/Screen-Shot%2011.png)
