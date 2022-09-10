@@ -3,8 +3,23 @@ project:
 
 book:
   title: "TidyMass tutorial"
+  cover-image: figures/tidymass_logo.png
+  subtitle: "TidyMass: an object-oriented reproducible analysis framework for LC–MS data"
+  abstract: "TidyMass project is a comprehensive computational framework that can process the whole workflow of data processing and analysis for LC-MS-based untargeted metabolomics using tidyverse principles."
   author: "Xiaotao Shen"
   date: "9/4/2022"
+  sharing: twitter
+  open-graph: true
+  twitter-card: 
+    site: "@xiaotaoshen1990"
+  sidebar:
+    search: true
+  navbar:
+    search: true
+    right:
+      - icon: github
+        href: https://github.com/tidymass/tidymass_tutorial
+        aria-label: GitHub
   chapters:
     - index.qmd
     - install_Rstudio_R.qmd
@@ -14,6 +29,7 @@ book:
     - Rstudio_project.qmd
     - massconverter.qmd
     - massprocesser.qmd
+    - massdataset.qmd
     - summary.qmd
     - references.qmd
 
@@ -21,9 +37,14 @@ bibliography: references.bib
 
 format:
   html:
-    theme: cosmo
+    theme: Litera
   pdf:
     documentclass: scrreprt
 
 editor: visual
 
+website:
+  comments: 
+    hypothesis:
+      theme: clean
+      openSidebar: false

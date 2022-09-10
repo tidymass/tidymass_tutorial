@@ -1,0 +1,137 @@
+# massdataset and mass_dataset object
+
+We can use `massdataset` package to organize omics data.
+
+The website of `massdataset`. <https://massdataset.tidymass.org/>
+
+## Create a new R script
+
+Open the project you created.
+
+![](figures/Screen-Shot%2018.png)
+
+Create a new R script named `mass_dataset.R`.
+
+## Create `mass_dataset` object
+
+Get the demo data.
+
+Then add below code.
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+library(tidymass)
+```
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+masstools::setwd_project()
+rm(list = ls())
+dir.create("mass_dataset")
+```
+
+Get the demo data that built in massdataset package.
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+data("expression_data", package = "massdataset")
+data("sample_info", package = "massdataset")
+data("variable_info", package = "massdataset")
+```
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+head(expression_data)
+```
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+head(sample_info)
+```
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+head(variable_info)
+```
+
+Then we can create mass_data class object using create_mass_dataset() function.
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+object =
+  create_mass_dataset(
+    expression_data = expression_data,
+    sample_info = sample_info,
+    variable_info = variable_info
+  )
+```
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+object
+```
+
+Export `mass_dataset` class object to csv for xlsx.
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+export_mass_dataset(object = object,
+                    file_type = "xlsx",
+                    path = "mass_dataset/demo_data")
+```
+
+Then all the data will be in `mass_dataset/demo_data`.
+
+![](figures/Screen-Shot 28.png)
+
+## mzMine feature table to mass_dataset class
+
+We can also directory convert feature table from mzMine to mass_dataset class.
+
+Get demo data.
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+data("mzmine_table")
+head(mzmine_table)
+```
+
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+object <-
+   convet_mzmine2mass_dataset(x = mzmine_table)
+object
+```
+
+## MS-DIAL feature table to mass_dataset class
+
+Get the demo data.
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+data("msdial_table")
+head(msdial_table)
+```
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+object <-
+   convert_msdial2mass_dataset(x = msdial_table)
+object
+```
+
+
+## Add MS2 spectra data into mass_dataset class object
+
+Get the demo data.
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+load("raw_data/cell_liang_2020/MS1/Result/object")
+```
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+object
+```
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+object =
+  mutate_ms2(
+    object = object,
+    column = "rp",
+    polarity = "positive",
+    ms1.ms2.match.mz.tol = 10,
+    ms1.ms2.match.rt.tol = 15,
+    path = "raw_data/cell_liang_2020/MS2/"
+  )
+```
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+object
+```
+
