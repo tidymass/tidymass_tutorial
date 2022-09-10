@@ -1,4 +1,4 @@
 - source: project
   netlify:
     - id: 57fb3dc6-8939-4a34-aab2-2e833ee9736c
-      url: 'https://tidymass-book.tidymass.org'
+      url: 'https://book.tidymass.org'

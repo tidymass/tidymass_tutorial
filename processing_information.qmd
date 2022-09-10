@@ -1,0 +1,63 @@
+# Processing information in `mass_dataset` class
+
+We can use `massdataset` package to organize omics data.
+
+In `mass_dataset` class object, it contains all the processing information in it. We can trace the analysis and parameters so we can do the reproducible analysis.
+
+## Demo data
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+library(tidymass)
+```
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+data("expression_data")
+data("sample_info")
+data("variable_info")
+
+object =
+  create_mass_dataset(
+    expression_data = expression_data,
+    sample_info = sample_info,
+    variable_info = variable_info
+  )
+```
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+object =
+object %>%
+  activate_mass_dataset(what = "expression_data") %>%
+  filter(!is.na(QC_1))
+
+object =
+  object %>%
+  activate_mass_dataset(what = "expression_data") %>%
+  filter(!is.na(QC_2))
+
+object =
+object %>%
+  mutate_mean_intensity()
+
+object =
+  object %>%
+  mutate_median_intensity() %>% 
+  mutate_rsd()
+```
+
+## `process_info`
+
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+process_info = extract_process_info(object)
+process_info
+```
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+process_info$mutate_median_intensity
+process_info$mutate_median_intensity@parameter
+```
+
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+report_parameters(object = object, path = "mass_dataset/demo_data/")
+```
