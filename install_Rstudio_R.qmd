@@ -4,13 +4,13 @@
 
 If you are new to R, install R first.
 
-Download the R. [https://www.r-project.org/](https://www.r-project.org/)
+Download the R. <https://www.r-project.org/>
 
 ## Rstudio
 
 Then install Rstudio.
 
-Download the Rstudio. [https://www.rstudio.com/products/rstudio/download/#download](https://www.rstudio.com/products/rstudio/download/#download)
+Download the Rstudio. <https://www.rstudio.com/products/rstudio/download/#download>
 
 Select the free version of RStudio Desktop.
 
@@ -20,6 +20,4 @@ Select the free version of RStudio Desktop.
 
 Then open the Rstudio.
 
-![](figures/Screen-Shot 1.png)
-
-
+![](figures/Screen-Shot%201.png)

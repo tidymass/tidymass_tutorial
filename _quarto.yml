@@ -22,7 +22,6 @@ book:
         aria-label: GitHub
   chapters:
     - index.qmd
-    - install_Rstudio_R.qmd
     - intro.qmd
     - install_tidymass.qmd
     - install_docker.qmd
@@ -38,6 +37,7 @@ book:
     - merge_split.qmd
     - r_base_function.qmd
     - ggplot2_mass_dataset.qmd
+    - data_cleaning.qmd
     - summary.qmd
     - references.qmd
 

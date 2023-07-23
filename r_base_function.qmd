@@ -44,7 +44,6 @@ colnames(object)
 head(rownames(object))
 ```
 
-
 Use `[` to select variables and samples from object.
 
 ```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
@@ -65,7 +64,6 @@ colnames(object)
 object[,c("Blank_3", "Blank_4")]
 ```
 
-
 ```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
 ###log
 object2 = 
@@ -79,4 +77,3 @@ object2 =
 unlist(object[1,,drop = TRUE])
 unlist(object2[1,,drop = TRUE])
 ```
-

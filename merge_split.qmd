@@ -40,7 +40,6 @@ colnames(object2)
 cbind(object1, object2)
 ```
 
-
 ### `rbind()`
 
 `rbind()` means that two `mass_dataset` have same samples and totally different variables
@@ -59,7 +58,6 @@ rownames(object2)
 ```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
 rbind(object1, object2)
 ```
-
 
 ## Split `mass_dataset`
 

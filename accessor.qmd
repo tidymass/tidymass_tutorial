@@ -19,7 +19,6 @@ object =
 object
 ```
 
-
 ## Base function
 
 ```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
@@ -37,6 +36,7 @@ object["M136T55_2_POS",]
 
 object["M136T55_2_POS","Blank_3"]
 ```
+
 If set `drop = TRUE`, then it will return a numeric vector, not a `mass_dataset`.
 
 ```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
